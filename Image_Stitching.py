@@ -77,7 +77,7 @@ class Image_Stitching():
         height_img1, width_img1 = img1.shape[:2]
         height_img2, width_img2 = img2.shape[:2]
         
-        # 判断拼接方向
+        # auto select direction
         if self.direction == 'auto':
             if width_img1 / height_img1 > width_img2 / height_img2:
                 self.direction = 'horizontal'
@@ -131,10 +131,10 @@ if __name__ == '__main__':
         elif len(sys.argv) == 4:
             direction = sys.argv[3].lower()
             if direction not in ['horizontal', 'vertical', 'auto']:
-                raise ValueError("无效的拼接方向。请使用 'horizontal', 'vertical' 或 'auto'。")
+                raise ValueError("Invalid stitching direction. Please use 'horizontal', 'vertical' or 'auto'.")
             main(sys.argv[1], sys.argv[2], direction)
         else:
-            raise IndexError("参数数量不正确")
+            raise IndexError("Incorrect number of parameters")
     except IndexError:
         print("Please provide two source images and optional stitching direction:")
         print("Example: python Image_Stitching.py '/path/to/image1.jpg' '/path/to/image2.jpg' [horizontal|vertical|auto]")
